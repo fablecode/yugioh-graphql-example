@@ -1,5 +1,7 @@
 const { ApolloServer, gql } = require("apollo-server");
+
 const categories = require("./category");
+const subCategories = require("./subcategory");
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -10,9 +12,10 @@ const typeDefs = gql`
     type Query
     `;
 
+
 const server = new ApolloServer({
-    typeDefs: [typeDefs, categories.typeDef],
-    resolvers: [categories.resolvers]
+    typeDefs: [typeDefs, categories.typeDef, subCategories.typeDef],
+    resolvers: [categories.resolvers, subCategories.resolvers]
 });
 
 server.listen().then(({ url }) => {
